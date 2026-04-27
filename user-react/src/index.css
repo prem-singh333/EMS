@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+*{
+  transition: all 0.2s ease-in-out;
+
+}
+
+input, textarea{
+  outline: none;
+}
