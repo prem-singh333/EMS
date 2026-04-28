@@ -19,6 +19,7 @@ Route::post("/signup", [OrganizerAuthController::class, 'signup']);
 Route::post("/login", [OrganizerAuthController::class, 'login']);
 
 
+
 Route::group(['middleware'=>"auth:sanctum"], function(){
     //Get route
     Route::get('/add', [OrgnizerController::class, 'getAllEvents']);
@@ -37,6 +38,12 @@ Route::get('/add/{id}', [OrgnizerController::class, 'eventById']);
 
 //Event booking by user
 Route::post('/join-event', [BookinController::class, 'joinEvent']);
+
+//Show booking events
+Route::get('/booking-events', [BookinController::class, 'booking']);
+
+//my booking
+Route::get('/my-bookings', [BookinController::class, 'myBookings']);
 });
 
 

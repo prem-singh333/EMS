@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Bookedevent;
 use Illuminate\Support\Facades\Auth;
 
+
 class BookinController extends Controller
 {
     function joinEvent(Request $req){
@@ -29,5 +30,27 @@ class BookinController extends Controller
             "msg"=>"joined successfully",
 
         ], 200);
+    }
+
+
+    function booking(Request $req){
+        $bookingList = Bookedevent::with(['user', 'event'])->get()->groupBy('event_id');
+
+        $result = $bookingList->map(function($items){
+            return [
+                "event"=>$items[0]->event,
+                "total_users"=>$items->count(),
+                "users"=>$items->pluck('user')
+            ];
+    });
+
+        return $result->values();
+        
+    }
+
+    function myBookings(){
+        $user = auth()->id();
+       $bookings = Bookedevent::with('event')->where("user_id", $user)->get();
+        return $bookings;
     }
 }

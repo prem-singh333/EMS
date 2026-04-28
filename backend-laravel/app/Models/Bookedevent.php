@@ -10,4 +10,11 @@ class Bookedevent extends Model
         'user_id',
         'event_id'
     ];
+
+    function user(){
+        return $this->belongsTO(User::class);
+    }
+    function event(){
+        return $this->belongsTO(Organizer::class);
+    }
 }

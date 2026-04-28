@@ -32,3 +32,4 @@ class OrganizerAuthController extends Controller
         return ['success'=>true, 'result'=>$success, "msg"=>"user registered successfully"];
     }
 }
+
